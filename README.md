@@ -8,6 +8,8 @@ An agentic Retrieval-Augmented Generation (RAG) system that extends a baseline R
 
 Where a standard RAG pipeline retrieves context and generates a single response, an agentic RAG system reasons over the query, decides which tools or retrieval paths to use, reflects on intermediate results, and iterates until it reaches a satisfactory answer. This repo showcases that full reasoning loop.
 
+![Architecture](docs/agentic-rag-architecture.svg)
+
 ---
 
 ## Tech Stack
