@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" width="960" height="560">
+  <defs>
+    <marker id="arr"        markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#888882"/></marker>
+    <marker id="arr-green"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#10b981"/></marker>
+    <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#8b5cf6"/></marker>
+    <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f97316"/></marker>
+  </defs>
+  <rect width="960" height="560" fill="#f7f7f5"/>
+  <rect x="12"  y="12" width="156" height="532" rx="8" fill="#fef9f0" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <rect x="180" y="12" width="136" height="532" rx="8" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <rect x="328" y="12" width="418" height="532" rx="8" fill="#f0fdf4" stroke="#10b981" stroke-width="1.6" stroke-dasharray="6,3"/>
+  <rect x="758" y="12" width="190" height="248" rx="8" fill="#fdf4ff" stroke="#8b5cf6" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <rect x="758" y="272" width="190" height="272" rx="8" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="90"  y="30" text-anchor="middle" font-family="Courier New, monospace" font-size="9" font-weight="700" fill="#f59e0b" letter-spacing="1.5">INGESTION</text>
+  <text x="248" y="30" text-anchor="middle" font-family="Courier New, monospace" font-size="9" font-weight="700" fill="#a855f7" letter-spacing="1.5">VECTOR STORE</text>
+  <text x="537" y="30" text-anchor="middle" font-family="Courier New, monospace" font-size="9" font-weight="700" fill="#10b981" letter-spacing="1.5">LANGGRAPH STATE GRAPH</text>
+  <text x="853" y="30" text-anchor="middle" font-family="Courier New, monospace" font-size="9" font-weight="700" fill="#8b5cf6" letter-spacing="1.5">MEMORY</text>
+  <text x="853" y="290" text-anchor="middle" font-family="Courier New, monospace" font-size="9" font-weight="700" fill="#0ea5e9" letter-spacing="1.5">OUTPUT + UI</text>
+  <rect x="26"  y="50"  width="128" height="44" rx="6" fill="white" stroke="#f59e0b" stroke-width="1.8"/>
+  <text x="90"  y="68"  text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#1a1a18">loader.py</text>
+  <text x="90"  y="83"  text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">LlamaIndex PDF</text>
+  <rect x="26"  y="114" width="128" height="44" rx="6" fill="white" stroke="#f59e0b" stroke-width="1.8"/>
+  <text x="90"  y="132" text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#1a1a18">chunker.py</text>
+  <text x="90"  y="147" text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">RecursiveChar 384/40</text>
+  <rect x="26"  y="178" width="128" height="44" rx="6" fill="white" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="90"  y="196" text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#1a1a18">embedder.py</text>
+  <text x="90"  y="211" text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">OpenAIEmbeddings</text>
+  <rect x="194" y="114" width="108" height="44" rx="6" fill="white" stroke="#a855f7" stroke-width="1.8"/>
+  <text x="248" y="132" text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#1a1a18">store.py</text>
+  <text x="248" y="147" text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">Pinecone cloud</text>
+  <rect x="194" y="178" width="108" height="44" rx="6" fill="white" stroke="#f97316" stroke-width="1.8"/>
+  <text x="248" y="196" text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#1a1a18">retriever.py</text>
+  <text x="248" y="211" text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">similarity + metadata</text>
+  <circle cx="400" cy="62" r="16" fill="#1a1a2e"/>
+  <text x="400" y="67" text-anchor="middle" font-family="Courier New, monospace" font-size="8" font-weight="700" fill="white">START</text>
+  <rect x="344" y="94"  width="164" height="46" rx="6" fill="white" stroke="#10b981" stroke-width="1.8"/>
+  <text x="426" y="113" text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#1a1a18">route_query</text>
+  <text x="426" y="129" text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">router.py · RouteDecision</text>
+  <polygon points="537,172 572,200 537,228 502,200" fill="white" stroke="#10b981" stroke-width="1.8"/>
+  <text x="537" y="204" text-anchor="middle" font-family="Courier New, monospace" font-size="9" font-weight="700" fill="#10b981">route?</text>
+  <rect x="344" y="254" width="100" height="40" rx="6" fill="white" stroke="#10b981" stroke-width="1.6"/>
+  <text x="394" y="270" text-anchor="middle" font-family="Courier New, monospace" font-size="9.5" font-weight="700" fill="#1a1a18">retrieve</text>
+  <text x="394" y="284" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">hr_retrieval</text>
+  <rect x="458" y="254" width="100" height="40" rx="6" fill="white" stroke="#10b981" stroke-width="1.6"/>
+  <text x="508" y="270" text-anchor="middle" font-family="Courier New, monospace" font-size="9.5" font-weight="700" fill="#1a1a18">calculate</text>
+  <text x="508" y="284" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">calculator tool</text>
+  <rect x="572" y="254" width="100" height="40" rx="6" fill="white" stroke="#10b981" stroke-width="1.6"/>
+  <text x="622" y="270" text-anchor="middle" font-family="Courier New, monospace" font-size="9.5" font-weight="700" fill="#1a1a18">date_lookup</text>
+  <text x="622" y="284" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">date_calculator</text>
+  <rect x="458" y="312" width="100" height="40" rx="6" fill="white" stroke="#10b981" stroke-width="1.6"/>
+  <text x="508" y="328" text-anchor="middle" font-family="Courier New, monospace" font-size="9.5" font-weight="700" fill="#1a1a18">decompose</text>
+  <text x="508" y="342" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">multi_step</text>
+  <rect x="572" y="312" width="100" height="40" rx="6" fill="white" stroke="#ef4444" stroke-width="1.6"/>
+  <text x="622" y="328" text-anchor="middle" font-family="Courier New, monospace" font-size="9.5" font-weight="700" fill="#1a1a18">escalate</text>
+  <text x="622" y="342" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">out_of_scope</text>
+  <rect x="344" y="374" width="100" height="40" rx="6" fill="white" stroke="#f97316" stroke-width="1.6"/>
+  <text x="394" y="390" text-anchor="middle" font-family="Courier New, monospace" font-size="8.5" font-weight="700" fill="#1a1a18">check_retrieval</text>
+  <text x="394" y="404" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">score threshold</text>
+  <path d="M 344 394 C 308 394 308 274 344 274" stroke="#f97316" stroke-width="1.3" fill="none" marker-end="url(#arr-orange)" stroke-dasharray="4,2"/>
+  <text x="292" y="330" font-family="Courier New, monospace" font-size="7.5" fill="#f97316" text-anchor="middle">retry</text>
+  <text x="292" y="342" font-family="Courier New, monospace" font-size="7.5" fill="#f97316" text-anchor="middle">max 2x</text>
+  <rect x="458" y="434" width="214" height="44" rx="6" fill="white" stroke="#0ea5e9" stroke-width="1.8"/>
+  <text x="565" y="452" text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#1a1a18">generate</text>
+  <text x="565" y="468" text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">LCEL · prompt | llm | parser</text>
+  <rect x="458" y="490" width="214" height="24" rx="4" fill="#f0fdf4" stroke="#8b5cf6" stroke-width="1.2"/>
+  <text x="565" y="506" text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#8b5cf6">update_memory  →  END</text>
+  <rect x="772" y="48"  width="162" height="44" rx="6" fill="white" stroke="#8b5cf6" stroke-width="1.8"/>
+  <text x="853" y="66"  text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#1a1a18">memory.py</text>
+  <text x="853" y="81"  text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">sliding window + summary</text>
+  <rect x="772" y="108" width="162" height="36" rx="5" fill="#fdf4ff" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="853" y="123" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">max_turns · summary_threshold</text>
+  <text x="853" y="136" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">Redis in production</text>
+  <rect x="772" y="158" width="162" height="36" rx="5" fill="#fdf4ff" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="853" y="173" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">tools.py · @tool decorator</text>
+  <text x="853" y="186" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">retriever · calc · date · escalate</text>
+  <rect x="772" y="308" width="162" height="44" rx="6" fill="white" stroke="#0ea5e9" stroke-width="1.8"/>
+  <text x="853" y="326" text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#1a1a18">app.py</text>
+  <text x="853" y="341" text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">Streamlit · graph trace tab</text>
+  <rect x="772" y="368" width="162" height="44" rx="6" fill="white" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="5,3"/>
+  <text x="853" y="386" text-anchor="middle" font-family="Courier New, monospace" font-size="10.5" font-weight="700" fill="#888882">eval.py</text>
+  <text x="853" y="401" text-anchor="middle" font-family="Courier New, monospace" font-size="8" fill="#888882">route accuracy · tool precision</text>
+  <rect x="772" y="428" width="162" height="36" rx="5" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="853" y="443" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">pipeline.py · orchestrator</text>
+  <text x="853" y="456" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">warm / cold start</text>
+  <rect x="772" y="478" width="162" height="28" rx="5" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="853" y="496" text-anchor="middle" font-family="Courier New, monospace" font-size="7.5" fill="#888882">FastAPI + LangSmith in prod</text>
+  <line x1="90"  y1="94"  x2="90"  y2="110" stroke="#888882" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="90"  y1="158" x2="90"  y2="174" stroke="#888882" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="154" y1="200" x2="190" y2="148" stroke="#888882" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="248" y1="158" x2="248" y2="174" stroke="#888882" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="302" y1="200" x2="340" y2="140" stroke="#888882" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arr)"/>
+  <line x1="400" y1="78"  x2="400" y2="90"  stroke="#10b981" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="426" y1="140" x2="520" y2="182" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="502" y1="200" x2="444" y2="254" stroke="#10b981" stroke-width="1.2" marker-end="url(#arr-green)"/>
+  <line x1="524" y1="226" x2="508" y2="250" stroke="#10b981" stroke-width="1.2" marker-end="url(#arr-green)"/>
+  <line x1="554" y1="212" x2="605" y2="250" stroke="#10b981" stroke-width="1.2" marker-end="url(#arr-green)"/>
+  <line x1="520" y1="228" x2="508" y2="308" stroke="#10b981" stroke-width="1.1" stroke-dasharray="3,2" marker-end="url(#arr-green)"/>
+  <line x1="556" y1="222" x2="622" y2="308" stroke="#ef4444" stroke-width="1.1" stroke-dasharray="3,2" marker-end="url(#arr)"/>
+  <line x1="394" y1="294" x2="394" y2="370" stroke="#888882" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="394" y1="414" x2="480" y2="440" stroke="#888882" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="508" y1="352" x2="519" y2="430" stroke="#888882" stroke-width="1.1" stroke-dasharray="3,2" marker-end="url(#arr)"/>
+  <line x1="622" y1="352" x2="608" y2="430" stroke="#888882" stroke-width="1.1" stroke-dasharray="3,2" marker-end="url(#arr)"/>
+  <line x1="565" y1="478" x2="565" y2="487" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <line x1="672" y1="500" x2="768" y2="338" stroke="#888882" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr)"/>
+  <line x1="768" y1="68"  x2="512" y2="112" stroke="#8b5cf6" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arr-purple)"/>
+  <text x="645" y="74"  font-family="Courier New, monospace" font-size="7.5" fill="#8b5cf6" text-anchor="middle">memory_context injected into state</text>
+  <line x1="344" y1="544" x2="368" y2="544" stroke="#10b981" stroke-width="1.5"/>
+  <text x="373" y="548" font-family="Courier New, monospace" font-size="8" fill="#10b981">agent routing</text>
+  <line x1="454" y1="544" x2="478" y2="544" stroke="#8b5cf6" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <text x="483" y="548" font-family="Courier New, monospace" font-size="8" fill="#8b5cf6">memory injection</text>
+  <line x1="582" y1="544" x2="606" y2="544" stroke="#f97316" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <text x="611" y="548" font-family="Courier New, monospace" font-size="8" fill="#f97316">retry loop</text>
+  <line x1="676" y1="544" x2="700" y2="544" stroke="#888882" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <text x="705" y="548" font-family="Courier New, monospace" font-size="8" fill="#888882">data flow</text>
+</svg>

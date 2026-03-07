@@ -130,4 +130,4 @@ This project is intentionally scoped for demonstration. In a production system:
 
 ## Related Project
 
-This repo builds directly on [rag-pipeline](https://github.com/yourusername/rag-pipeline), which covers the baseline RAG implementation this system extends.
+This repo builds directly on [rag-pipeline](https://github.com/tohio/rag-pipeline), which covers the baseline RAG implementation this system extends.
