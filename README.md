@@ -80,7 +80,7 @@ agentic-rag/
 git clone https://github.com/yourusername/agentic-rag.git
 cd agentic-rag
 pip install -r requirements.txt
-cp .env.example .env
+cp .env.sample .env
 # Add your API keys to .env
 ```
 
