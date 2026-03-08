@@ -16,11 +16,11 @@ Where a standard RAG pipeline retrieves context and generates a single response,
 
 | Layer | Tool |
 |---|---|
-| LLM | Multiple (OpenAI GPT-4o, Anthropic Claude, etc.) |
-| Embeddings | OpenAI / HuggingFace |
-| Vector Store | Pinecone (cloud managed) |
-| Memory | In-memory (conversation history) |
-| Framework | Python |
+| LLM | OpenAI GPT-4o (Anthropic Claude via env toggle) |
+| Embeddings | OpenAI text-embedding-3-small |
+| Vector Store | Pinecone (serverless, cloud managed) |
+| Agent Framework | LangChain + LangGraph |
+| Memory | Sliding window + summarization (`ConversationMemory`) |
 | Demo UI | Streamlit |
 
 ---
@@ -59,7 +59,7 @@ agentic-rag/
 │   └── app.py
 ├── tests/
 │   └── test_pipeline.py
-├── .env.example
+├── .env.sample
 ├── requirements.txt
 ├── Dockerfile
 └── README.md
@@ -76,10 +76,24 @@ agentic-rag/
 
 **Installation**
 
+Using `venv`:
 ```bash
-git clone https://github.com/yourusername/agentic-rag.git
+git clone https://github.com/tohio/agentic-rag.git
 cd agentic-rag
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+cp .env.sample .env
+# Add your API keys to .env
+```
+
+Using `uv`:
+```bash
+git clone https://github.com/tohio/agentic-rag.git
+cd agentic-rag
+uv venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+uv pip install -r requirements.txt
 cp .env.sample .env
 # Add your API keys to .env
 ```
@@ -100,21 +114,23 @@ streamlit run ui/app.py
 
 ## Key Design Decisions
 
-**Agent reasoning loop** — the agent evaluates the query, selects the appropriate tool or retrieval path via the router, reflects on intermediate results, and re-retrieves or re-reasons if the answer is insufficient. This loop is explicit and traceable in the code.
+**LangGraph state graph** — the agent is built as a `StateGraph` with typed `AgentState`, where each node is a pure function and dependencies are injected via `functools.partial` at build time. Conditional edges replace if/else chains, making the routing logic explicit and testable.
 
-**Query routing** — rather than always hitting the vector store, the router classifies the query and directs it to the most appropriate tool — retrieval, web search, calculator, or direct LLM response.
+**Query routing** — `router.py` uses `with_structured_output()` to force a typed `RouteDecision` object with confidence score and reasoning, directing each query to the right node: HR retrieval, calculator, date lookup, multi-step decomposition, escalation, or out-of-scope handling.
 
-**Conversational memory** — the agent maintains a running conversation history passed as context on each LLM call. This allows multi-turn reasoning without losing prior context.
+**Agent reasoning loop** — after retrieval, `check_retrieval` evaluates result quality against a score threshold and can re-retrieve up to two times before falling through to generation. The iteration count is bounded by `MAX_AGENT_ITERATIONS` in `.env`.
 
-**Multiple LLMs** — same as the baseline pipeline, the generation layer supports swapping between providers to compare agent behavior across models.
+**Conversational memory** — `ConversationMemory` implements a sliding window with automatic summarization once the turn count exceeds `MEMORY_SUMMARY_THRESHOLD`. Memory context is injected into the initial `AgentState` on every query, not appended to the prompt chain.
 
-**Streamlit UI** — chosen over Gradio to visualize the agent's reasoning steps, tool calls, and intermediate outputs as a dashboard alongside the final response.
+**Tool pattern** — tools are registered with the `@tool` decorator and follow a factory pattern in `get_tools()`, returning strings as required by LangGraph's `ToolNode`. Four tools: `hr_policy_retriever`, `calculator`, `date_calculator`, `escalation_router`.
+
+**Streamlit UI** — chosen over Gradio to surface the agent's reasoning steps, route confidence, sub-query decomposition, and tool calls as a structured dashboard alongside the final response.
 
 ---
 
 ## Evaluation
 
-The `evaluation/` module measures retrieval precision and recall, answer faithfulness and relevance, agent tool selection accuracy, and reasoning step count per query.
+The `evaluation/` module extends the baseline RAG metrics with agentic-specific measures: route classification accuracy, tool selection precision, average reasoning iterations per query, and escalation rate. Results are aggregated by route type to identify weak spots in the routing logic.
 
 ---
 
@@ -123,10 +139,10 @@ The `evaluation/` module measures retrieval precision and recall, answer faithfu
 This project is intentionally scoped for demonstration. In a production system:
 
 - **Vector store** — Pinecone would be configured with namespaces and metadata filtering for multi-tenant support and more precise retrieval.
-- **Memory** — in-memory conversation history would be replaced by Redis for persistent, low-latency session storage across multiple users and requests.
+- **Memory** — `ConversationMemory` would be backed by Redis for persistent, low-latency session storage across multiple users and requests.
 - **API layer** — the agent pipeline would be exposed via a FastAPI service with async support to handle the latency of multi-step reasoning without blocking.
 - **Frontend** — the Streamlit demo would be replaced by a React or Next.js frontend with streaming support for displaying agent reasoning steps in real time.
-- **Observability** — LangSmith or Arize would be added for tracing each reasoning step, tool call, and retrieval result in production.
+- **Observability** — LangSmith would be added for tracing each node execution, tool call, and retrieval result across the full state graph.
 
 ---
 
