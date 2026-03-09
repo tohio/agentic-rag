@@ -21,7 +21,7 @@ Where a standard RAG pipeline retrieves context and generates a single response,
 | Vector Store | Pinecone (serverless, cloud managed) |
 | Agent Framework | LangChain + LangGraph |
 | Memory | Sliding window + summarization (`ConversationMemory`) |
-| Demo UI | Streamlit |
+| UI | Streamlit |
 
 ---
 
