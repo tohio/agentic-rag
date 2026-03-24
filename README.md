@@ -16,7 +16,7 @@ Where a standard RAG pipeline retrieves context and generates a single response,
 
 | Layer | Tool |
 |---|---|
-| LLM | OpenAI GPT-5.4 (Anthropic Claude via env toggle) |
+| LLM | OpenAI GPT-4o (Anthropic Claude via env toggle) |
 | Embeddings | OpenAI text-embedding-3-small |
 | Vector Store | Pinecone (serverless, cloud managed) |
 | Agent Framework | LangChain + LangGraph |
