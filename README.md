@@ -139,6 +139,12 @@ pytest tests/test_pipeline.py
 
 _Screenshots will be added once the agentic-rag system is fully deployed._
 
+![alt text](docs/screenshots/image.png)
+
+![alt text](docs/screenshots/image-1.png)
+
+![alt text](docs/screenshots/image-2.png)
+
 ---
 
 ## Key Design Decisions

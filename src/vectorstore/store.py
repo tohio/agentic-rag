@@ -10,7 +10,7 @@ Strategy: Load if exists, create if not.
     - Force rebuild: set FORCE_REBUILD=true in .env or pass rebuild=True
 
 Configuration (in order of precedence):
-    1. Environment variables (see .env.example for all options)
+    1. Environment variables (see .env.sample for all options)
     2. Sensible defaults
 
 Required environment variables:
@@ -172,12 +172,11 @@ def build_vector_store(
         f"Upserting {len(documents)} document(s) into '{index_name}'..."
     )
 
-    # LangChain's from_documents handles embedding + upsert in one call
+    # API key is picked up automatically from PINECONE_API_KEY env var
     vectorstore = PineconeVectorStore.from_documents(
         documents=documents,
         embedding=embed_model,
         index_name=index_name,
-        pinecone_api_key=api_key,
     )
 
     logger.info(f"Vector store built in Pinecone: '{index_name}'")
@@ -209,10 +208,10 @@ def load_vector_store(embed_model: OpenAIEmbeddings) -> PineconeVectorStore:
 
     logger.info(f"Loading existing Pinecone index: '{index_name}'")
 
+    # API key is picked up automatically from PINECONE_API_KEY env var
     vectorstore = PineconeVectorStore.from_existing_index(
         index_name=index_name,
         embedding=embed_model,
-        pinecone_api_key=api_key,
     )
 
     logger.info("Pinecone vector store loaded")
@@ -268,6 +267,8 @@ def get_vector_store(
 # -------------------------------------------------------------------
 if __name__ == "__main__":
     import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
     from dotenv import load_dotenv
     from src.ingestion.loader import load_documents
     from src.ingestion.chunker import chunk_documents
@@ -277,9 +278,8 @@ if __name__ == "__main__":
     test_path = sys.argv[1] if len(sys.argv) > 1 else "data/raw"
 
     try:
-        # Load and chunk documents
         raw_docs = load_documents(test_path)
-        lc_docs = chunk_documents(raw_docs)  # returns List[Document]
+        lc_docs = chunk_documents(raw_docs)
         embed_model = get_embed_model()
 
         vectorstore = get_vector_store(
