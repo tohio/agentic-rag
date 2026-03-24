@@ -33,7 +33,7 @@ import logging
 import os
 from typing import Literal, Optional
 
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 

@@ -574,8 +574,8 @@ def after_tool_or_escalation(state: AgentState) -> str:
 
 def _reformulate_query(llm, query: str) -> str:
     """Ask the LLM to reformulate a query that returned poor results."""
-    from langchain.prompts import ChatPromptTemplate
-    from langchain.schema.output_parser import StrOutputParser
+    from langchain_core.prompts import ChatPromptTemplate
+    from langchain_core.output_parsers import StrOutputParser
 
     prompt = ChatPromptTemplate.from_messages([
         ("system",
@@ -599,8 +599,8 @@ def _extract_expression_from_query(llm, query: str) -> str:
     """Extract arithmetic expression from a query string."""
     if llm is None:
         return "0"
-    from langchain.prompts import ChatPromptTemplate
-    from langchain.schema.output_parser import StrOutputParser
+    from langchain_core.prompts import ChatPromptTemplate
+    from langchain_core.output_parsers import StrOutputParser
 
     prompt = ChatPromptTemplate.from_messages([
         ("system",
@@ -624,8 +624,8 @@ def _extract_date_params_from_query(llm, query: str) -> tuple[str, int]:
     """Extract date action and days from a query string."""
     if llm is None:
         return "today", 0
-    from langchain.prompts import ChatPromptTemplate
-    from langchain.schema.output_parser import StrOutputParser
+    from langchain_core.prompts import ChatPromptTemplate
+    from langchain_core.output_parsers import StrOutputParser
 
     prompt = ChatPromptTemplate.from_messages([
         ("system",

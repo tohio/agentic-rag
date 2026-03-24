@@ -30,7 +30,7 @@ Production note:
 
 Usage:
     from src.vectorstore.store import get_vector_store
-    from langchain.schema import Document
+    from langchain_core.documents import Document
 
     docs = [Document(page_content="text", metadata={"source": "handbook"})]
     vectorstore = get_vector_store(documents=docs)
@@ -42,7 +42,7 @@ from typing import List, Optional
 
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
-from langchain.schema import Document
+from langchain_core.documents import Document
 from pinecone import Pinecone, ServerlessSpec
 
 logging.basicConfig(level=logging.INFO)

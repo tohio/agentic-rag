@@ -35,8 +35,8 @@ import logging
 import os
 from typing import Optional
 
-from langchain.prompts import ChatPromptTemplate
-from langchain.schema.output_parser import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import ChatOpenAI
 
 logging.basicConfig(level=logging.INFO)

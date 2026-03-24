@@ -33,8 +33,8 @@ import logging
 import os
 from typing import List, Optional
 
-from langchain.schema import Document as LangChainDocument
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_core.documents import Document as LangChainDocument
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from llama_index.core.schema import Document as LlamaDocument
 
 logging.basicConfig(level=logging.INFO)

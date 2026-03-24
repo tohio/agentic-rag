@@ -73,7 +73,7 @@ def mock_llm():
 @pytest.fixture
 def mock_vectorstore():
     """Mock LangChain PineconeVectorStore."""
-    from langchain.schema import Document
+    from langchain_core.documents import Document
     mock = MagicMock()
     mock_doc = Document(
         page_content="Employees receive 15 days of PTO.",
@@ -123,7 +123,7 @@ class TestChunker:
     def test_chunk_returns_langchain_documents(self, sample_llama_docs):
         """Should return LangChain Documents, not LlamaIndex nodes."""
         from src.ingestion.chunker import chunk_documents
-        from langchain.schema import Document
+        from langchain_core.documents import Document
         docs = chunk_documents(sample_llama_docs)
         assert len(docs) >= 1
         assert isinstance(docs[0], Document)
@@ -249,7 +249,7 @@ class TestRetriever:
 
     def test_format_retrieved_context_includes_chunk_label(self, mock_vectorstore):
         from src.retrieval.retriever import format_retrieved_context
-        from langchain.schema import Document
+        from langchain_core.documents import Document
         doc = Document(
             page_content="PTO policy text.",
             metadata={"file_name": "handbook.pdf", "page_label": "5"},

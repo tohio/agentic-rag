@@ -34,7 +34,7 @@ import logging
 import os
 from typing import List, Optional
 
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain_pinecone import PineconeVectorStore
 
 logging.basicConfig(level=logging.INFO)

@@ -104,11 +104,40 @@ cp .env.sample .env
 python src/pipeline.py
 ```
 
-**Launch the demo UI**
+**Launch the UI**
 
 ```bash
 streamlit run ui/app.py
 ```
+
+The UI will be available at `http://localhost:8501` in your browser.
+
+**Run evaluation**
+
+```bash
+python evaluation/eval.py --qa data/raw/qa_pairs.json --output evaluation/results.json
+```
+
+**Run with Docker**
+
+```bash
+docker build -t agentic-rag .
+docker run --env-file .env -v $(pwd)/data:/app/data -p 8501:8501 agentic-rag streamlit run ui/app.py
+```
+
+The UI will be available at `http://localhost:8501`. Pass your API keys via the `.env` file — do not bake them into the image.
+
+**Run tests**
+
+```bash
+pytest tests/test_pipeline.py
+```
+
+---
+
+## Screenshots
+
+_Screenshots will be added once the agentic-rag system is fully deployed._
 
 ---
 
