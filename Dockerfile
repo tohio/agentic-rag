@@ -1,36 +1,61 @@
-# ── Base image ────────────────────────────────────────────────────
-FROM python:3.11
+# =============================================================
+# agentic-rag Dockerfile
+# =============================================================
+# Builds a container for the Agentic RAG pipeline and Streamlit UI.
+#
+# Build:
+#   docker build -t agentic-rag .
+#
+# Run interactive mode:
+#   docker run --env-file .env agentic-rag
+#
+# Run single query:
+#   docker run --env-file .env \
+#     agentic-rag python src/pipeline.py --query "What is the PTO policy?"
+#
+# Run Streamlit UI:
+#   docker run --env-file .env -p 8501:8501 agentic-rag \
+#     streamlit run ui/app.py --server.port=8501 --server.address=0.0.0.0
+#
+# Notes:
+#   - Unlike rag-pipeline, NO volume mount needed for the vector index
+#     since Pinecone is cloud-managed — just pass API keys via --env-file
+#   - Mount ./data only if you need to ingest new documents
+#     docker run --env-file .env -v $(pwd)/data:/app/data agentic-rag
+# =============================================================
 
-# ── Environment ───────────────────────────────────────────────────
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+FROM python:3.11-slim
 
-# ── Working directory ─────────────────────────────────────────────
 WORKDIR /app
 
-# ── Dependencies ──────────────────────────────────────────────────
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app
+
+# System dependencies for PDF processing
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpoppler-cpp-dev \
+    poppler-utils \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies (layer caching)
 COPY requirements.txt .
-RUN pip install -r requirements.txt && \
-    pip install langchain-anthropic langchain-openai
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# ── Application code ──────────────────────────────────────────────
-COPY . .
+# Copy source code
+COPY src/ ./src/
+COPY ui/ ./ui/
+COPY evaluation/ ./evaluation/
+COPY tests/ ./tests/
 
-# ── Streamlit config ──────────────────────────────────────────────
-# Disable telemetry and set headless mode for container environments
-RUN mkdir -p /root/.streamlit && \
-    echo '[general]\nemail = ""\n' > /root/.streamlit/credentials.toml && \
-    echo '[server]\nheadless = true\nport = 8501\nenableCORS = false\nenableXsrfProtection = false\n' \
-    > /root/.streamlit/config.toml
+# Create data directories
+RUN mkdir -p data/raw data/processed
 
-# ── Port ──────────────────────────────────────────────────────────
+# Expose Streamlit port
 EXPOSE 8501
 
-# ── Healthcheck ───────────────────────────────────────────────────
-HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
-    CMD curl -f http://localhost:8501/_stcore/health || exit 1
-
-# ── Entrypoint ────────────────────────────────────────────────────
-CMD ["streamlit", "run", "app.py"]
+# Default command — interactive pipeline mode
+CMD ["python", "src/pipeline.py"]
