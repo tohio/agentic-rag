@@ -16,7 +16,7 @@ Where a standard RAG pipeline retrieves context and generates a single response,
 
 | Layer | Tool |
 |---|---|
-| LLM | OpenAI GPT-4o (Anthropic Claude via env toggle) |
+| LLM | OpenAI GPT-5.4 (Anthropic Claude via env toggle) |
 | Embeddings | OpenAI text-embedding-3-small |
 | Vector Store | Pinecone (serverless, cloud managed) |
 | Agent Framework | LangChain + LangGraph |
@@ -137,13 +137,24 @@ pytest tests/test_pipeline.py
 
 ## Screenshots
 
-_Screenshots will be added once the agentic-rag system is fully deployed._
+**CLI — pipeline query with route and source citations**
 
-![alt text](docs/screenshots/image.png)
+![CLI](docs/screenshots/cli-query.png)
 
-![alt text](docs/screenshots/image-1.png)
+> Query: *"How many PTO days does a new employee get?"*
+> Route: `hr_retrieval` (confidence: 0.98) — retrieved 5 chunks with scores up to 0.69, grounded answer with reasoning trace.
 
-![alt text](docs/screenshots/image-2.png)
+**Streamlit UI — Ask HR tab**
+
+![Ask HR](docs/screenshots/ui-ask-hr.png)
+
+> Clean chat interface with session stats, memory turns, and route tracking in the sidebar. Date-aware answers using the `date_lookup` tool.
+
+**Streamlit UI — RAG vs Agentic comparison tab**
+
+![RAG vs Agentic](docs/screenshots/ui-rag-comparison.png)
+
+> Same question asked through standard RAG and agentic RAG side by side. Standard RAG returns a generic policy answer. Agentic RAG routes via Multi-Step Reasoning, combines HR policy retrieval with date calculation, and returns a specific eligibility date: **June 21, 2026**. LangGraph agent trace shows route, confidence, iterations, and reasoning.
 
 ---
 

@@ -1,0 +1,57 @@
+# agentic-rag — Local TODO
+# Not tracked in git — add .todo to .gitignore
+
+---
+
+## Evaluation
+
+- [ ] Fix hit rate metric — keyword matching is wrong approach for semantic retrieval,
+      replace with embedding similarity check against expected answer
+- [ ] Fix faithfulness metric — text_preview still too short or context not reaching
+      judge correctly, investigate further with low-scoring examples
+- [ ] Fix date_lookup misrouting — "when can I use" type questions routing to
+      date_lookup instead of hr_retrieval, router needs clearer signal to distinguish
+      date calculation vs policy eligibility questions
+- [ ] Update ground truth qa_pairs.json for date-dependent questions — static expected
+      answers like "after 90 days" conflict with agent's dynamic date calculations
+- [ ] Add RAGAS evaluation framework — standardised metrics including agentic-specific
+      measures (tool call accuracy, agent goal accuracy)
+
+---
+
+## Router
+
+- [ ] Improve routing for ambiguous "when" queries — add examples to router prompt
+      to distinguish date calculation vs policy lookup
+- [ ] Investigate remaining 17.1% routing misses — run analysis on misrouted questions
+      in results.json to identify patterns
+
+---
+
+## Architecture
+
+- [ ] Fix architecture SVG rendering issues
+
+---
+
+## Documentation
+
+- [ ] Add screenshots to docs/screenshots/ folder:
+        - docs/screenshots/cli-query.png
+        - docs/screenshots/ui-ask-hr.png
+        - docs/screenshots/ui-rag-comparison.png
+- [ ] Add evaluation results to README once metrics are reliable
+
+---
+
+## Infrastructure
+
+- [ ] Add data/ folder .gitkeep placeholders for raw/ and processed/
+- [ ] Confirm pytest.ini committed to repo root
+
+---
+
+## Future
+
+- [ ] Add NeMo Guardrails at graph entry (before route_query) and exit
+      (before response) — do not wrap individual nodes

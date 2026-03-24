@@ -1,0 +1,253 @@
+{
+  "version": "1.0",
+  "description": "Ground truth Q&A pairs for Meridian Capital Group RAG pipeline evaluation",
+  "document": "meridian-capital-handbook.pdf",
+  "total": 35,
+  "pairs": [
+    {
+      "id": "Q01",
+      "question": "How many PTO days does a new employee receive in their first year?",
+      "expected_answer": "15 days",
+      "source_section": "1.1 Paid Time Off",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q02",
+      "question": "When can a new employee start using their accrued PTO?",
+      "expected_answer": "After completing 90 days of service",
+      "source_section": "1.1 Paid Time Off",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q03",
+      "question": "How many PTO days can an employee carry over into the next calendar year?",
+      "expected_answer": "A maximum of 10 unused PTO days",
+      "source_section": "1.1 Paid Time Off",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q04",
+      "question": "How much advance notice is required when requesting 4 consecutive days of PTO?",
+      "expected_answer": "A minimum of 5 business days in advance",
+      "source_section": "1.1 Paid Time Off",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q05",
+      "question": "How many sick days does an employee receive per year and do they carry over?",
+      "expected_answer": "Employees receive 7 sick days per calendar year. Sick leave does not carry over.",
+      "source_section": "1.2 Sick Leave",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q06",
+      "question": "How many weeks of paid parental leave does a primary caregiver receive?",
+      "expected_answer": "16 weeks of fully paid parental leave",
+      "source_section": "1.3 Parental Leave",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q07",
+      "question": "What is the eligibility requirement for parental leave?",
+      "expected_answer": "Employees must have completed at least 12 months of continuous service",
+      "source_section": "1.3 Parental Leave",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q08",
+      "question": "Does the company continue retirement contributions while an employee is on parental leave?",
+      "expected_answer": "Yes, employees on parental leave continue to receive full benefits including health insurance, retirement contributions, and equity vesting",
+      "source_section": "1.3 Parental Leave",
+      "difficulty": "Hard"
+    },
+    {
+      "id": "Q09",
+      "question": "How many paid bereavement days does an employee receive for the loss of a grandparent?",
+      "expected_answer": "3 paid days",
+      "source_section": "1.4 Bereavement Leave",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q10",
+      "question": "How many days does the company cover for jury duty?",
+      "expected_answer": "Up to 15 business days at full regular pay",
+      "source_section": "1.5 Jury Duty & Civic Leave",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q11",
+      "question": "How long can an employee take an unpaid leave of absence?",
+      "expected_answer": "Up to 90 days",
+      "source_section": "1.6 Unpaid Leave of Absence",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q12",
+      "question": "What is the employee monthly premium for the Gold health insurance plan?",
+      "expected_answer": "$220 per month",
+      "source_section": "2.1 Health Insurance",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q13",
+      "question": "When does health insurance coverage begin for a new employee who starts on March 15?",
+      "expected_answer": "Coverage begins on April 1, the first day of the month following their start date",
+      "source_section": "2.1 Health Insurance",
+      "difficulty": "Hard"
+    },
+    {
+      "id": "Q14",
+      "question": "What is the annual allowance for frames or contact lenses under the vision plan?",
+      "expected_answer": "$200 per calendar year",
+      "source_section": "2.2 Dental & Vision",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q15",
+      "question": "What is the maximum company 401(k) match as a percentage of base salary?",
+      "expected_answer": "5% of base salary per year",
+      "source_section": "2.3 Retirement \u2014 401(k) Plan",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q16",
+      "question": "What percentage of the company 401(k) match is vested after 2 years of service?",
+      "expected_answer": "50%",
+      "source_section": "2.3 Retirement \u2014 401(k) Plan",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q17",
+      "question": "When are annual performance bonuses paid out?",
+      "expected_answer": "In February following the performance year",
+      "source_section": "2.4 Equity & Bonus Compensation",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q18",
+      "question": "What is the target bonus range for a Vice President?",
+      "expected_answer": "30% to 50% of base salary",
+      "source_section": "2.4 Equity & Bonus Compensation",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q19",
+      "question": "How do RSUs vest for eligible employees?",
+      "expected_answer": "Over a 4-year period with a 1-year cliff \u2014 25% vests after the first year and the remaining 75% vests quarterly over the following 3 years",
+      "source_section": "2.4 Equity & Bonus Compensation",
+      "difficulty": "Hard"
+    },
+    {
+      "id": "Q20",
+      "question": "What is the annual professional development budget per employee?",
+      "expected_answer": "$2,500 per year",
+      "source_section": "2.5 Additional Benefits",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q21",
+      "question": "How many free therapy sessions per year does the EAP provide?",
+      "expected_answer": "Up to 12 free therapy sessions per year through Lyra Health",
+      "source_section": "2.5 Additional Benefits",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q22",
+      "question": "What is the maximum annual gym and wellness reimbursement?",
+      "expected_answer": "Up to $600 per year",
+      "source_section": "2.5 Additional Benefits",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q23",
+      "question": "How often are employees paid and is direct deposit required?",
+      "expected_answer": "Employees are paid bi-weekly (26 pay periods per year) and direct deposit is required",
+      "source_section": "2.6 Compensation Philosophy & Pay Cycles",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q24",
+      "question": "When does the mid-year performance review take place and does it result in a salary change?",
+      "expected_answer": "The mid-year review is conducted in July and does not result in compensation changes",
+      "source_section": "3.1 Review Cycle",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q25",
+      "question": "What performance rating is required to be considered for a promotion?",
+      "expected_answer": "A rating of 4 or above in the most recent annual review",
+      "source_section": "3.5 Promotion Process",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q26",
+      "question": "What happens to an employee who receives a rating of 2 in their annual review?",
+      "expected_answer": "They will be placed on a formal Performance Improvement Plan (PIP) within 30 days of the review",
+      "source_section": "3.2 Performance Ratings",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q27",
+      "question": "What merit increase range can an employee expect if they receive an Exceptional rating?",
+      "expected_answer": "Between 6% and 10%",
+      "source_section": "3.4 Compensation Adjustments",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q28",
+      "question": "When do merit increases from the annual review take effect?",
+      "expected_answer": "Effective March 1 of the following year",
+      "source_section": "3.4 Compensation Adjustments",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q29",
+      "question": "How long must an employee be in their current role before being considered for promotion?",
+      "expected_answer": "A minimum of 18 months",
+      "source_section": "3.5 Promotion Process",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q30",
+      "question": "What are the four core values of Meridian Capital Group?",
+      "expected_answer": "Integrity, Excellence, Accountability, and Inclusion",
+      "source_section": "4.1 Our Values",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "Q31",
+      "question": "How can an employee anonymously report harassment or discrimination?",
+      "expected_answer": "Through the Ethics Hotline at 1-800-555-0192 or online at ethics.meridiancapitalgroup.com",
+      "source_section": "4.4 Anti-Harassment & Non-Discrimination",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q32",
+      "question": "What must an employee do before taking on outside consulting work with a competitor?",
+      "expected_answer": "Submit an Outside Business Activity Request form in Workday for pre-approval by the Compliance team",
+      "source_section": "4.2 Conflicts of Interest",
+      "difficulty": "Hard"
+    },
+    {
+      "id": "Q33",
+      "question": "What are the steps in the disciplinary process in order?",
+      "expected_answer": "Verbal warning, written warning, Performance Improvement Plan, suspension with or without pay, and termination",
+      "source_section": "4.6 Disciplinary Process",
+      "difficulty": "Hard"
+    },
+    {
+      "id": "Q34",
+      "question": "Can an employee discuss client portfolios in a public setting?",
+      "expected_answer": "No, employees may not discuss client portfolios or transactions in public settings as this violates the firm's confidentiality policy",
+      "source_section": "4.3 Confidentiality & Data Privacy",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "Q35",
+      "question": "What is the monthly pre-tax commuter benefit limit?",
+      "expected_answer": "Up to $315 per month toward transit or parking expenses",
+      "source_section": "2.5 Additional Benefits",
+      "difficulty": "Easy"
+    }
+  ]
+}

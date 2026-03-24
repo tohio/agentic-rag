@@ -285,7 +285,7 @@ def get_retrieval_metadata(
             "file_name": doc.metadata.get("file_name", "unknown"),
             "page_label": doc.metadata.get("page_label", "unknown"),
             "similarity_score": round(score, 4),
-            "text_preview": doc.page_content[:120].replace("\n", " ") + "...",
+            "text_preview": doc.page_content[:500].replace("\n", " ") + "...",
         }
         for i, (doc, score) in enumerate(results, 1)
     ]

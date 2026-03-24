@@ -40,8 +40,9 @@ import os
 import sys
 import time
 from pathlib import Path
-from typing import Optional
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from typing import Optional
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -53,7 +54,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-DEFAULT_QA_PATH = "evaluation/qa_pairs.json"
+DEFAULT_QA_PATH = "data/raw/qa_pairs.json"
 DEFAULT_DOCS_PATH = "data/raw"
 
 # -------------------------------------------------------------------
@@ -67,7 +68,7 @@ EXPECTED_ROUTES = {
 }
 
 # -------------------------------------------------------------------
-# LLM-as-judge prompts (inherited from rag-pipeline eval.py)
+# LLM-as-judge prompts
 # -------------------------------------------------------------------
 
 FAITHFULNESS_PROMPT = """\
@@ -120,16 +121,21 @@ def load_qa_pairs(qa_path: str) -> list[dict]:
             f"Generate it by converting meridian-evaluation-qa.md to JSON."
         )
     with open(path, "r") as f:
-        pairs = json.load(f)
+        data = json.load(f)
+        pairs = data["pairs"]
+
     logger.info(f"Loaded {len(pairs)} Q&A pairs from {qa_path}")
     return pairs
 
 
 def _score_with_llm(llm, prompt: str) -> int:
-    """Use the LLM to score a response on a 1-5 scale."""
+    """
+    Use the LLM to score a response on a 1-5 scale.
+    Uses LangChain's .invoke() which returns an AIMessage with .content.
+    """
     try:
-        response = llm.complete(prompt)
-        score = int(response.text.strip())
+        response = llm.invoke(prompt)
+        score = int(response.content.strip())
         return max(1, min(5, score))
     except (ValueError, AttributeError) as e:
         logger.warning(f"Failed to parse LLM score: {e}")
@@ -157,10 +163,7 @@ def evaluate_correctness(
     return _score_with_llm(llm, prompt)
 
 
-def evaluate_route_accuracy(
-    actual_route: str,
-    difficulty: str,
-) -> bool:
+def evaluate_route_accuracy(actual_route: str, difficulty: str) -> bool:
     """
     Check whether the agent chose the expected route for this question.
 
@@ -203,13 +206,29 @@ def evaluate_tool_precision(tool_calls: list[dict], route: str) -> bool:
     return bool(tool_names & expected_tools)
 
 
-def evaluate_retrieval_hit(results: list, expected_answer: str) -> bool:
-    """Check if any retrieved chunk contains content relevant to the expected answer."""
+def evaluate_retrieval_hit(sources: list, expected_answer: str) -> bool:
+    """
+    Check if any retrieved source contains content relevant to the expected answer.
+    Works with the agentic pipeline's sources list format (list of dicts).
+
+    Args:
+        sources (list): Source dicts from pipeline response.
+        expected_answer (str): Ground truth answer.
+
+    Returns:
+        bool: True if a relevant source was retrieved.
+    """
+    if not sources:
+        return False
+
     expected_lower = expected_answer.lower()
     key_terms = [w for w in expected_lower.split() if len(w) > 4]
 
-    for result in results:
-        chunk_text = result.node.text.lower() if hasattr(result, "node") else str(result).lower()
+    for source in sources:
+        # sources is a list of dicts with keys: file_name, page, score, text_preview
+        chunk_text = source.get("text_preview", "").lower()
+        if not chunk_text:
+            continue
         matches = sum(1 for term in key_terms if term in chunk_text)
         if matches >= max(1, len(key_terms) // 2):
             return True
@@ -270,9 +289,7 @@ def run_evaluation(
             ) or "No context retrieved."
 
             # Score all dimensions
-            hit = evaluate_retrieval_hit(
-                response.get("_raw_results", []), expected
-            )
+            hit = evaluate_retrieval_hit(sources, expected)
             faithfulness = evaluate_faithfulness(llm, answer, context)
             relevance = evaluate_relevance(llm, question, answer)
             correctness = evaluate_correctness(llm, question, expected, answer)
@@ -286,6 +303,8 @@ def run_evaluation(
                 "source_section": source_section,
                 "difficulty": difficulty,
                 "route": route,
+                "route_reasoning": response.get("route_reasoning", ""),
+                "route_confidence": response.get("route_confidence", 0),
                 "iterations": iterations,
                 "retrieval_hit": hit,
                 "faithfulness_score": faithfulness,
@@ -294,6 +313,9 @@ def run_evaluation(
                 "route_accurate": route_accurate,
                 "tool_precise": tool_precise,
                 "num_tool_calls": len(tool_calls),
+                "tool_calls": tool_calls,
+                "sources": sources,
+                "num_sources": len(sources),
                 "escalated": route == "escalation",
                 "latency_seconds": latency,
                 "error": None,
@@ -308,6 +330,8 @@ def run_evaluation(
                 "source_section": source_section,
                 "difficulty": difficulty,
                 "route": None,
+                "route_reasoning": "",
+                "route_confidence": 0,
                 "iterations": 0,
                 "retrieval_hit": False,
                 "faithfulness_score": 0,
@@ -316,6 +340,9 @@ def run_evaluation(
                 "route_accurate": False,
                 "tool_precise": False,
                 "num_tool_calls": 0,
+                "tool_calls": [],
+                "sources": [],
+                "num_sources": 0,
                 "escalated": False,
                 "latency_seconds": 0,
                 "error": str(e),
